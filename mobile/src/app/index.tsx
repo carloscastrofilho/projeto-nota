@@ -1,15 +1,21 @@
 import { Link, useRouter } from "expo-router";
 import { useState, } from "react";
 import { Text, View, StyleSheet, TextInput, TouchableOpacity, } from "react-native";
+import * as Auth from "@/api/apiauth"
 
 export default function Index() {
  
   const [login, setLogin] = useState<string>();
    const [senha, setSenha] = useState<string>();
    const router = useRouter();
-   function onPressAcessar(){
-    console.log(`login: ${login}, senha: ${senha}`)
-    router.navigate("/(dash)/dashboard")
+   
+   async function onPressAcessar(){
+    //console.log(`login: ${login}, senha: ${senha}`)
+    const resposta = await Auth.authLogin(login, senha);
+    console.log( resposta );
+
+   // router.navigate("/(dash)/dashboard")
+
    }
   return (
     <View style={styles.container}>
